@@ -113,6 +113,26 @@ resource_pools:
   - name: small_errand
     cloud_properties: (( merge || meta.resource_pools.small_errand.cloud_properties ))
 
+  acceptance_tests:
+    <<: (( merge || nil ))
+    api:  (( "api." domain ))
+    apps_domain: (( domain ))
+    admin_user: admin
+    admin_password: admin
+    skip_ssl_validation: true
+    nodes: 1
+    use_http: true
+
+  smoke_tests:
+    api:  (( "api." domain ))
+    apps_domain: (( domain ))
+    user: admin
+    password: admin
+    org: SMOKE_TEST_ORG
+    space: SMOKE_TEST_SPACE
+    ginkgo_opts: ~
+    skip_ssl_validation: true
+
 jobs:
   - name: nats_z1
     instances: 1
